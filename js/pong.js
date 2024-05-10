@@ -18,11 +18,6 @@ function getHeight()
 }
 
 
-//Cambiar
-const paddleWidth = 0.01 * getWidth();
-const paddleHeight =  0.16 * getHeight();
-const paddle2x = getWidth() - (0.05 * getWidth()) - paddleWidth;
-
 class Pong
 {
     constructor()
@@ -33,59 +28,76 @@ class Pong
 
         this.ctx = canvas.getContext("2d"); // the rederezing context
 
-        this.paddleHeight = (getHeight()) / 2;
-
         this.ball = new Ball();
-        this.paddle1 = new Paddle(vec2(getWidth() * 0.05, 0.5 * getHeight() - (paddleHeight / 2)), paddleWidth, paddleHeight);
-        this.paddle2 = new Paddle(vec2(paddle2x, 0.5 * getHeight() - (paddleHeight / 2)), paddleWidth, paddleHeight);
+        this.createPaddles();
         this.keysPressed = new Map();
+    }
+    
+    createPaddles()
+    {
+        this.paddleHeight = (getHeight()) / 2;
+        const paddleWidth = 0.01 * getWidth();
+        const paddleHeight = 0.16 * getHeight();
+        const paddle2x = this.canvas.width - (0.05 * getWidth()) - paddleWidth;
+        const centerY = 0.5 * this.canvas.height - (paddleHeight / 2);
+
+        this.paddle1 = new Paddle(vec2(getWidth() * 0.05, centerY), paddleWidth, paddleHeight);
+        this.paddle2 = new Paddle(vec2(paddle2x, centerY), paddleWidth, paddleHeight);
     }
 
     drawFieldLines() {
-        const fieldWidth = canvas.width - 100; // Ancho del campo
-        const fieldHeight = canvas.height - 100; // Alto del campo
-        const margin = 50; // Tamaño del margen
-        const lineWidth = 3; // Grosor de las líneas
-        const dashLength = 30; // Longitud de las líneas discontinuas
+        const fieldWidth = this.canvas.width - 100;
+        const fieldHeight = this.canvas.height - 100;
+        const margin = 50; 
+        const lineWidth = 3;
+        const dashLength = 30; //height discontinued line
     
-        // Dibujar líneas continuas en los bordes del campo
-        this.ctx.strokeStyle = "white"; // Color de las líneas
-        this.ctx.lineWidth = lineWidth; // Grosor de las líneas
+
+        this.ctx.strokeStyle = "white"; // Line color
+        this.ctx.lineWidth = lineWidth; // Width line
     
-        // // Línea superior
+        // Top line
         // this.ctx.beginPath();
         // this.ctx.moveTo(margin, margin);
         // this.ctx.lineTo(margin + fieldWidth, margin);
         // this.ctx.stroke();
     
-        // // Línea inferior
+        // Bottom line
         // this.ctx.beginPath();
         // this.ctx.moveTo(margin, margin + fieldHeight);
         // this.ctx.lineTo(margin + fieldWidth, margin + fieldHeight);
         // this.ctx.stroke();
     
-        // // Línea izquierda
+        // Left line
         // this.ctx.beginPath();
         // this.ctx.moveTo(margin, margin);
         // this.ctx.lineTo(margin, margin + fieldHeight);
         // this.ctx.stroke();
     
-        // // Línea derecha
+        // Right line
         // this.ctx.beginPath();
         // this.ctx.moveTo(margin + fieldWidth, margin);
         // this.ctx.lineTo(margin + fieldWidth, margin + fieldHeight);
         // this.ctx.stroke();
-        // Dibujar líneas discontinuas en el medio del campo
+
+        // Draw discontinued line in the mid fields
         this.ctx.setLineDash([dashLength, dashLength]); // Establecer el patrón de línea discontinua
-    
-        // Línea vertical en el centro del campo
+        // Vertical line field
         this.ctx.beginPath();
         this.ctx.moveTo(margin + fieldWidth / 2, 0);
         this.ctx.lineTo(margin + fieldWidth / 2, this.canvas.height);
         this.ctx.stroke();
     
-        // Restaurar el patrón de línea a continuo
+        // Restart continuous pattern
         this.ctx.setLineDash([]);
+    }
+
+    resize() {
+
+        this.canvas.width = getWidth();
+        this.canvas.height = getHeight();
+        this.ball.radius = 0.006 * getWidth(); //Sie ball
+        this.createPaddles(); //Size Paddles
     }
 
     gameLoop()
@@ -129,11 +141,6 @@ function gameDraw(ball, paddle1, paddle2)
     paddle2.render();
 }
 
-function resize(paddle)
-{
-    pong.canvas.width = window.innerWidth;
-    pong.canvas.height = window.innerHeight;
-}
 
 
 window.addEventListener("keydown", function(e){
@@ -144,7 +151,7 @@ window.addEventListener("keyup", function(e){
     pong.keysPressed.set(e.keyCode, false);
 })
 
-window.addEventListener("resize",resize)
+window.addEventListener("resize",() => pong.resize())
 
 
 const move = function (paddle) {

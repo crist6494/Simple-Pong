@@ -11,7 +11,7 @@ class Ball
     {
         this.pos = {x: getWidth() / 2, y: getHeight() / 2};
         this.velocity = {x: 4,  y: 0};
-        this.radius = 11;
+        this.radius = 0.006 * getWidth();
         this.maxAngle = 55;
         this.speed = 5;
         this.deltaTime = 0;
@@ -41,7 +41,6 @@ class Ball
         this.reset_velocity = {x: 4,  y: 0};
         this.velocity.x = this.reset_velocity.x;
         this.velocity.y = this.reset_velocity.y;
-        console.log(this.velocity);
         this.speed = 5;
     }
 }
@@ -144,8 +143,8 @@ function paddleBouncedBall(ball, paddle, sign)
     else
         ball.velocity.x = Math.abs(ball.speed * Math.cos(angle));
     ball.velocity.y = ball.speed * Math.sin(angle); 
-    if(ball.speed < 18)
-        ball.speed += 0.5;
+    if(ball.speed < 12)
+        ball.speed += 0.4;
 }
 
 function ballPaddleCollision(ball, paddle)
