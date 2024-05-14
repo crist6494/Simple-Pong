@@ -4,11 +4,18 @@
 }
 
 body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
     overflow: hidden;
 }
 
 #canvas{
-    background-color: black;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgb(12, 0, 13) 10%, rgb(62, 2, 71) 50%, rgba(12,0,13) 90%);  
 }
 
 h1{
@@ -25,4 +32,15 @@ h1{
 
 .player2--score{
     right: 35%;
+}
+
+.menu {
+    text-align: center;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
 }
