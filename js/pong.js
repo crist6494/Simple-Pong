@@ -126,11 +126,11 @@ class Pong
 function gameUpdate(ball, paddle1, paddle2, mode)
 {
     ball.move()
-    move2(paddle1);
+    move(paddle1);
     if(mode === 1)
         player2IA(paddle2,ball)
     else if(mode ===2)
-        move(paddle2);
+        move2(paddle2);
     ballCollisionEdges(ball);
     paddleCollisionEdges(paddle1);
     paddleCollisionEdges(paddle2);
@@ -163,20 +163,20 @@ window.addEventListener("resize",() => pong.resize())
 
 
 const move = function (paddle) {
-    if(pong.keysPressed.get(KEY_UP))
-        paddle.moveUp();
-
-    if(pong.keysPressed.get(KEY_DOWN))
-        paddle.moveDown();
-};
-
-const move2 = function (paddle) {
     if(pong.keysPressed.get(KEY_W))
         paddle.moveUp();
 
     if(pong.keysPressed.get(KEY_S))
         paddle.moveDown();
 
+};
+
+const move2 = function (paddle) {
+    if(pong.keysPressed.get(KEY_UP))
+        paddle.moveUp();
+
+    if(pong.keysPressed.get(KEY_DOWN))
+        paddle.moveDown();
 };
 
 
@@ -206,7 +206,6 @@ let pong;
 
 function init_pong(mode)
 {
-<<<<<<< HEAD
     const menu = document.getElementById("menu");
     const canvas = document.getElementById("canvas");
     const github = document.querySelector(".github-link");
@@ -217,14 +216,6 @@ function init_pong(mode)
     document.querySelector(".player1--score").classList.remove("hidden");
     document.querySelector(".player2--score").classList.remove("hidden");
 
-=======
-    menu.style.display = "none";
-        
-    canvas.classList.remove("hidden");
-    document.querySelector(".player1--score").classList.remove("hidden");
-    document.querySelector(".player2--score").classList.remove("hidden");
-
->>>>>>> origin/master
     pong = new Pong(mode);
     pong.gameLoop();
 }
@@ -233,12 +224,7 @@ function init_pong(mode)
 document.addEventListener("DOMContentLoaded", () => {
     const onePlayerBtn = document.getElementById("one-player-btn");
     const twoPlayerBtn = document.getElementById("two-players-btn");
-<<<<<<< HEAD
     
-=======
-    const menu = document.getElementById("menu");
-    const canvas = document.getElementById("canvas");
->>>>>>> origin/master
 
     onePlayerBtn.addEventListener("click", () => {
         init_pong(1);
