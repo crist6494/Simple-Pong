@@ -20,8 +20,9 @@ function getHeight()
 
 class Pong
 {
-    constructor()
+    constructor(mode)
     {
+        this.mode = mode
         this.canvas = document.getElementById("canvas");
         this.canvas.width = getWidth();
         this.canvas.height= getHeight();
@@ -30,7 +31,7 @@ class Pong
         this.pitchWidth = this.canvas.width - this.margin * 2;
         this.pitchHeight = this.canvas.height - this.margin * 2;
 
-        this.ctx = canvas.getContext("2d"); // the rederezing context
+        this.ctx = this.canvas.getContext("2d"); // the rederezing context
 
         this.ball = new Ball();
         this.createPaddles();
@@ -106,26 +107,30 @@ class Pong
 
     gameLoop()
     {
+        const background = document.getElementById("canvas");
+        background.style.background = "linear-gradient(90deg, rgb(12, 0, 13) 10%, rgb(62, 2, 71) 50%, rgba(12,0,13) 90%)";
         //() => this.gameLoop() arrow function call the function
         window.requestAnimationFrame(() => this.gameLoop()); //Call the (function) befeore the next repaitn of the browser 60 times per second
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //Restart the select pixels => coords(x,y) and size(width, height)
         //ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
         //ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        gameUpdate(this.ball, this.paddle1, this.paddle2);
+        gameUpdate(this.ball, this.paddle1, this.paddle2, this.mode);
         gameDraw(this.ball, this.paddle1, this.paddle2);
     }
 };
 
 
 
-function gameUpdate(ball, paddle1, paddle2)
+function gameUpdate(ball, paddle1, paddle2, mode)
 {
     ball.move()
     move2(paddle1);
-    //move(paddle2);
-    player2IA(paddle2,ball)
-
+    if(mode === 1)
+        player2IA(paddle2,ball)
+    else if(mode ===2)
+        move(paddle2);
     ballCollisionEdges(ball);
     paddleCollisionEdges(paddle1);
     paddleCollisionEdges(paddle2);
@@ -197,9 +202,36 @@ function player2IA(paddle, ball)
     }
 } 
 
+let pong;
 
+function init_pong(mode)
+{
+    const menu = document.getElementById("menu");
+    const canvas = document.getElementById("canvas");
+    const github = document.querySelector(".github-link");
 
+    menu.style.display = "none";
+    canvas.classList.remove("hidden");
+    github.classList.add("hidden");
+    document.querySelector(".player1--score").classList.remove("hidden");
+    document.querySelector(".player2--score").classList.remove("hidden");
+
+    pong = new Pong(mode);
+    pong.gameLoop();
+}
 
 //Start game
-const pong = new Pong();
-pong.gameLoop();
+document.addEventListener("DOMContentLoaded", () => {
+    const onePlayerBtn = document.getElementById("one-player-btn");
+    const twoPlayerBtn = document.getElementById("two-players-btn");
+    
+
+    onePlayerBtn.addEventListener("click", () => {
+        init_pong(1);
+   
+    });
+
+    twoPlayerBtn.addEventListener("click", () => {
+        init_pong(2);
+    });
+});

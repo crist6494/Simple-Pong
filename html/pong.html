@@ -8,9 +8,19 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    <h1 class="player1--score">0</h1>
-    <h1 class="player2--score">0</h1>
+    <div id="menu">
+        <h1 class="menu-title">Pong</h1>
+        <div class="menu-buttons">
+            <button id="one-player-btn">1 Player</button>
+            <button id="two-players-btn">2 Players</button>
+        </div>
+    </div>
+    <a href="https://github.com/crist6494" target="_blank" class="github-link">
+        Author:crist6494
+    </a>
+    <canvas id="canvas" class="hidden"></canvas>
+    <h1 class="player1--score hidden">0</h1>
+    <h1 class="player2--score hidden">0</h1>
     <script src="../js/elements.js" ></script>
     <script src="../js/pong.js"></script>
 </body>
