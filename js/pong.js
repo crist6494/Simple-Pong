@@ -206,6 +206,7 @@ let pong;
 
 function init_pong(mode)
 {
+<<<<<<< HEAD
     const menu = document.getElementById("menu");
     const canvas = document.getElementById("canvas");
     const github = document.querySelector(".github-link");
@@ -216,6 +217,14 @@ function init_pong(mode)
     document.querySelector(".player1--score").classList.remove("hidden");
     document.querySelector(".player2--score").classList.remove("hidden");
 
+=======
+    menu.style.display = "none";
+        
+    canvas.classList.remove("hidden");
+    document.querySelector(".player1--score").classList.remove("hidden");
+    document.querySelector(".player2--score").classList.remove("hidden");
+
+>>>>>>> origin/master
     pong = new Pong(mode);
     pong.gameLoop();
 }
@@ -224,7 +233,12 @@ function init_pong(mode)
 document.addEventListener("DOMContentLoaded", () => {
     const onePlayerBtn = document.getElementById("one-player-btn");
     const twoPlayerBtn = document.getElementById("two-players-btn");
+<<<<<<< HEAD
     
+=======
+    const menu = document.getElementById("menu");
+    const canvas = document.getElementById("canvas");
+>>>>>>> origin/master
 
     onePlayerBtn.addEventListener("click", () => {
         init_pong(1);

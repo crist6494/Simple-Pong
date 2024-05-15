@@ -65,7 +65,11 @@ button:hover {
 .github-link {
     position: fixed;
     padding: 3px;
+<<<<<<< HEAD
     left: 40px;
+=======
+    left: 20px;
+>>>>>>> origin/master
     bottom: 20px;
     opacity: 0.7;
     font-size: 13px;
