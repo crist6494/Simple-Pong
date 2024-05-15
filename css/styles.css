@@ -1,21 +1,95 @@
 *{
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 body{
+    /* background-color: black;*/
+    overflow: hidden;
+    background-image: url("../img/9207849.jpg");
+    background-size: cover;
+}
+
+/* MENU */
+
+#menu {
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semi-transparente */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
+    padding: 20vh;
 }
 
-#canvas{
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgb(12, 0, 13) 10%, rgb(62, 2, 71) 50%, rgba(12,0,13) 90%);  
+.menu-title {
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 4rem;
+    color: white;
+    height: 20vh;
+    padding: 0vh;
+    animation: bounce 1s ease infinite alternate; /* Animación de rebote */
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    margin-bottom: 56vh;
+}
+
+button{
+    padding: 10px 20px;
+    font-size: 18px;
+    background: rgb(123, 1, 121);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Transición suave al pasar el ratón */
+}
+
+button:hover {
+    background-color: #02b5bb; /* Cambia el color de fondo al pasar el ratón */
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
+/* GITHUB */
+
+.github-link {
+    position: fixed;
+    padding: 3px;
+    left: 20px;
+    bottom: 20px;
+    opacity: 0.7;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    color: cyan;
+    border: 2px solid ;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.github-link:hover {
+    opacity: 0.8;
+    background-color: transparent;
+    color: magenta;
+    border-color: magenta;
+}
+
+
+/* GAME */
+canvas {
+    display: none; /* Ocultar el canvas inicialmente */
+    margin: 0 auto;
+    display: block;
 }
 
 h1{
@@ -34,13 +108,7 @@ h1{
     right: 35%;
 }
 
-.menu {
-    text-align: center;
-}
-
-button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
+.hidden
+{
+    display: none;
+} 
